@@ -1,5 +1,5 @@
 <?php
-
+get_header();
 // Loop through all blog posts
 while (have_posts()) {
     // Tells wordpress to get all the infos of the post
@@ -10,3 +10,4 @@ while (have_posts()) {
         <?php the_content(); ?>
     <?php
 }
+get_footer();
