@@ -16,4 +16,12 @@ function university_files() {
     wp_enqueue_style('css_university_main', get_stylesheet_uri());
 }
 
+// Add load css / js action
 add_action('wp_enqueue_scripts', 'university_files');
+
+// Add the title value in our title tag
+function university_features(){
+    add_theme_support("title-tag");
+}
+
+add_action('after_setup_theme', 'university_features');
