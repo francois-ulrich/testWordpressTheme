@@ -4,6 +4,23 @@ get_header();
 // Get parent page ID
 $parentPageId = wp_get_post_parent_id(get_the_ID());
 
+if($parentPageId){
+    $findChildrenOf = $parentPageId;
+} else {
+    $findChildrenOf = get_the_ID();
+}
+
+// Associative array of arguments for the wp_list_pages() function called for the menu
+$wpListPagesArgs = array(
+    "title_li" => NULL,
+    "child_of" => $findChildrenOf,
+);
+
+// Get if page isn't a parent nor a children
+$notChildrenOrParent = $parentPageId || (get_pages(array(
+    "child_of" => get_the_ID()
+)));
+
 // Loop through all blog posts
 while (have_posts()) {
     // Tells wordpress to get all the infos of the post
@@ -26,19 +43,26 @@ while (have_posts()) {
             if( $parentPageId ){
                 ?>
                     <div class="metabox metabox--position-up metabox--with-home-link">
-                        <p><a class="metabox__blog-home-link" href="<?php get_permalink($parentPageId); ?>"><i class="fa fa-home" aria-hidden="true"></i> Back to <?php echo get_the_title( $parentPageId ); ?></a> <span class="metabox__main"><?php echo the_title(); ?></span></p>
+                        <p>
+                            <a class="metabox__blog-home-link" href="<?php echo get_permalink($parentPageId); ?>"><i class="fa fa-home" aria-hidden="true"></i> Back to <?php echo get_the_title( $parentPageId ); ?></a> 
+                            <span class="metabox__main"><?php echo the_title(); ?></span>
+                        </p>
                     </div>
                 <?php
             }
         ?>
 
-        <!-- <div class="page-links">
-            <h2 class="page-links__title"><a href="#">About Us</a></h2>
-            <ul class="min-list">
-                <li class="current_page_item"><a href="#">Our History</a></li>
-                <li><a href="#">Our Goals</a></li>
-            </ul>
-        </div> -->
+        <?php if($notChildrenOrParent){ ?>
+            <div class="page-links">
+                <h2 class="page-links__title"><a href="<?php echo get_permalink($parentPageId); ?>"><?php echo get_the_title( $parentPageId ); ?></a></h2>
+                <ul class="min-list">
+                    <?php 
+                        echo wp_list_pages($wpListPagesArgs);
+                    ?>
+                </ul>
+            </div>
+        <?php } ?>
+        
 
         <div class="generic-content">
             <?php 
