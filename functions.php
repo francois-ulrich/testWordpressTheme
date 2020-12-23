@@ -21,6 +21,9 @@ add_action('wp_enqueue_scripts', 'university_files');
 
 // Add the title value in our title tag
 function university_features(){
+    register_nav_menu('headerMenuLocation', 'Header Menu Location');
+    register_nav_menu('footerMenu1Location', 'Footer Menu 1 Location');
+    register_nav_menu('footerMenu2Location', 'Footer Menu 2 Location');
     add_theme_support("title-tag");
 }
 

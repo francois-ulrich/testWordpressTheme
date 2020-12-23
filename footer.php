@@ -1,3 +1,16 @@
+<?php
+    // Arguments for footer menu 1
+    $footerMenu1LocationArgs = array(
+        'theme_location' => 'footerMenu1Location',
+    );
+
+    // Arguments for footer menu 2
+    $footerMenu2LocationArgs = array(
+        'theme_location' => 'footerMenu2Location',
+    );
+?>
+        
+        
         <footer class="site-footer">
             <div class="site-footer__inner container container--narrow">
                 <div class="group">
@@ -12,23 +25,26 @@
                         <div class="site-footer__col-two">
                             <h3 class="headline headline--small">Explore</h3>
                             <nav class="nav-list">
-                                <ul>
+                                <?php
+                                    // Display footer menu 1
+                                    wp_nav_menu($footerMenu1LocationArgs);
+                                ?>
+                                <!-- <ul>
                                     <li><a href="#">About Us</a></li>
                                     <li><a href="#">Programs</a></li>
                                     <li><a href="#">Events</a></li>
                                     <li><a href="#">Campuses</a></li>
-                                </ul>
+                                </ul> -->
                             </nav>
                         </div>
 
                         <div class="site-footer__col-three">
                             <h3 class="headline headline--small">Learn</h3>
                             <nav class="nav-list">
-                                <ul>
-                                    <li><a href="#">Legal</a></li>
-                                    <li><a href="<?php echo site_url("/privacy-policy");?>">Privacy</a></li>
-                                    <li><a href="#">Careers</a></li>
-                                </ul>
+                                <?php
+                                    // Display footer menu 2
+                                    wp_nav_menu($footerMenu2LocationArgs);
+                                ?>
                             </nav>
                         </div>
                     </div>
