@@ -29,12 +29,6 @@
                                     // Display footer menu 1
                                     wp_nav_menu($footerMenu1LocationArgs);
                                 ?>
-                                <!-- <ul>
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Programs</a></li>
-                                    <li><a href="#">Events</a></li>
-                                    <li><a href="#">Campuses</a></li>
-                                </ul> -->
                             </nav>
                         </div>
 
