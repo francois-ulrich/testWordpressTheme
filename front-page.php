@@ -1,10 +1,18 @@
 <?php
 get_header();
 
-// Custom query test
+// Custom query for home posts
 $homepagePosts = new WP_Query(array(
     'posts_per_page' => 2
 ));
+
+// Custom query for home posts
+$homepageEvents = new WP_Query(array(
+    'posts_per_page' => 2,
+    'post_type' => 'event',
+));
+
+
 ?>
 
 <div class="page-banner">
@@ -21,8 +29,35 @@ $homepagePosts = new WP_Query(array(
     <div class="full-width-split__one">
         <div class="full-width-split__inner">
             <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
+            
+            <?php 
+                while($homepageEvents->have_posts()){
+                    $homepageEvents->the_post();
+                    ?>
 
-            <div class="event-summary">
+                    <div class="event-summary">
+                        <a class="event-summary__date t-center" href="#">
+                            <span class="event-summary__month">Apr</span>
+                            <span class="event-summary__day">02</span>
+                        </a>
+                        <div class="event-summary__content">
+                            <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+                            <p><?php echo wp_trim_words(get_the_content(), 18); ?> <a href="<?php the_permalink(); ?>" class="nu gray">Learn&nbsp;more</a></p>
+                        </div>
+                    </div>
+
+                    <?php
+                }
+            ?>
+
+
+            <?php
+                // Clean up after custom query
+                wp_reset_postdata();
+            ?>
+
+
+            <!-- <div class="event-summary"> 
                 <a class="event-summary__date t-center" href="#">
                     <span class="event-summary__month">Mar</span>
                     <span class="event-summary__day">25</span>
@@ -41,7 +76,7 @@ $homepagePosts = new WP_Query(array(
                     <h5 class="event-summary__title headline headline--tiny"><a href="#">Quad Picnic Party</a></h5>
                     <p>Live music, a taco truck and more can found in our third annual quad picnic day. <a href="#" class="nu gray">Learn more</a></p>
                 </div>
-            </div>
+            </div> -->
 
             <p class="t-center no-margin"><a href="#" class="btn btn--blue">View All Events</a></p>
         </div>
